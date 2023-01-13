@@ -81,7 +81,7 @@ class PlaylistsController extends AbstractController {
      */
     public function findAllContain($champ, Request $request, $table=""): Response{
         $valeur = $request->get("recherche");
-        $playlists = $this->playlistRepository->findByContainValue($champ, $valeur, $table);
+        $playlists = $this->playlistRepository->findByContainValueTable($champ, $valeur, $table);
         $categories = $this->categorieRepository->findAll();
         return $this->render(self::PAGE_PLAYLISTS, [
             'playlists' => $playlists,
