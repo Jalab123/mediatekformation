@@ -3,7 +3,9 @@
     <div class="row mt-3">
         <div class="col">
             <h4 class="text-info mt-5">{{ playlist.name }}</h4>
-            <strong>catégories : </strong>
+            <strong>Nombre de formation(s) dans cette playlist :</strong> {{ playlist.formations|length }}
+            <br />
+            <br><strong>catégories : </strong>
                 <!-- boucle pour afficher les catégories -->
                 {% set anccategorie = '' %}
                 {% for playlist in playlistcategories %}
