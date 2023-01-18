@@ -1,0 +1,29 @@
+{% extends "baseadmin.html.twig" %}
+
+{% block body %}
+    <h2>{{ formation.title }}</h2>
+    <p>Les champs marqués d'un (*) sont <strong>obligatoires</strong>.</p>
+    {{ form_start(formformation) }}
+    <div class ="row">
+        <div class ="col">
+            <div class="row">
+                <div class ="col-auto">
+                    {{ form_row(formformation.publishedAt) }}
+                </div>
+                <div class ="col">
+                    {{ form_row(formformation.title) }}
+                </div>
+                <div class ="col">
+                    {{ form_row(formformation.description) }}
+                </div>
+                <div class ="col">
+                    {{ form_row(formformation.videoId) }}
+                </div>
+            </div>
+            {{ form_row(formformation.playlist) }}
+            {{ form_row(formformation.categories) }}
+        </div>
+    </div>
+    
+    {{ form_end(formformation) }}
+{% endblock %}
