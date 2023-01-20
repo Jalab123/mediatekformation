@@ -1,0 +1,41 @@
+{% extends "baseadmin.html.twig" %}
+
+{% block body %}
+    <h2>{{ playlist.name }}</h2>
+    <p>Les champs marqués d'un (*) sont <strong>obligatoires</strong>.</p>
+    <div class ="row">
+        {{ form_start(formplaylist) }}
+        <div class ="col">
+            <div class="row">
+                <div class ="col-auto">
+                    {{ form_row(formplaylist.name) }}
+                </div>
+                <div class ="col">
+                    {{ form_row(formplaylist.description) }}
+                </div>
+            </div>
+        </div>
+        {{ form_end(formplaylist) }}
+        <div class="col">
+            {% for formation in playlist.formations %}
+                <div class="row mt-1">
+                    <div class="col-md-auto">
+                        {% if formation.miniature %}
+                            <a href="{{ path('formations.showone', {id:formation.id}) }}">
+                                <img src="{{ formation.miniature }}" alt = " miniature formation">
+                            </a>
+                        {% endif %}  
+                    </div>
+                    <div class="col d-flex align-items-center">
+                        <a href="{{ path('formations.showone', {id:formation.id}) }}" 
+                           class="link-secondary text-decoration-none">
+                            {{ formation.title }}
+                        </a>          
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+
+{% endblock %}
