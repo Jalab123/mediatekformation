@@ -1,0 +1,18 @@
+{% extends "baseadmin.html.twig" %}
+
+{% block body %}
+    <h2>{{ categorie.name }}</h2>
+    <p>Les champs marqués d'un (*) sont <strong>obligatoires</strong>.</p>
+    {{ form_start(formcategorie) }}
+    <div class ="row">
+        <div class ="col">
+            <div class="row">
+                <div class ="col-auto">
+                    {{ form_row(formcategorie.name) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{ form_end(formcategorie) }}
+{% endblock %}
