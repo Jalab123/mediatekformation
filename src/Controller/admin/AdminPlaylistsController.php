@@ -51,7 +51,7 @@ class AdminPlaylistsController extends AbstractController {
     }
     
     /**
-     * @Route("/admin/playlists", name="admin.playlists")
+     * @Route("/admin", name="admin.playlists")
      * @return Response
      */
     public function index(): Response{
