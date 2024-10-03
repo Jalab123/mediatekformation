@@ -28,7 +28,7 @@ class PlaylistRepository extends ServiceEntityRepository
 
     public function remove(Playlist $entity): void
     {
-        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->remove($entity);find All.
         $this->getEntityManager()->flush();
     }
     
@@ -41,7 +41,7 @@ class PlaylistRepository extends ServiceEntityRepository
     public function findAllOrderByName($ordre): array{
         return $this->createQueryBuilder('p')
                 ->leftjoin(self::FORMATIONS, 'f')
-                ->groupBy('"')
+                ->groupBy(self::ID)
                 ->orderBy(self::NOM, $ordre)
                 ->getQuery()
                 ->getResult();       
