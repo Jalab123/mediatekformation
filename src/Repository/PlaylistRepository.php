@@ -28,7 +28,7 @@ class PlaylistRepository extends ServiceEntityRepository
 
     public function remove(Playlist $entity): void
     {
-        $this->getEntityManager()->remove($entity);find All.
+        $this->getEntityManager()->remove($entity);
         $this->getEntityManager()->flush();
     }
     
