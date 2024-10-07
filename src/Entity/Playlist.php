@@ -106,5 +106,13 @@ class Playlist
         }
         return $categories;
     }
+    
+    /**
+     * @return int
+     */
+    public function getNbFormations() : int
+    {
+        return count($this->formations);
+    }
         
 }
