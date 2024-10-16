@@ -1,0 +1,24 @@
+{{ form_start(formformation) }}
+    {% if formation.miniature %}
+        <img src="{{ formation.miniature }}" alt="Miniature de la playlist">
+    {% endif %}
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-auto">
+                    {{ form_row(formformation.publishedAt) }}
+                </div>
+                <div class="col">
+                    {{ form_row(formformation.videoId) }}
+                </div>
+                <div class="col">
+                    {{ form_row(formformation.playlist) }}
+                </div>
+            </div>
+            {{ form_row(formformation.title) }}
+            {{ form_row(formformation.description) }}
+            {{ form_row(formformation.categories) }}
+        </div>
+    </div>
+{{ form_end(formformation) }}
+<em>Les champs marqués par un astérisque (*) sont obligatoires.</em>
