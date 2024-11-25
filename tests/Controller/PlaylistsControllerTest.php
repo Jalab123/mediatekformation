@@ -6,24 +6,33 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Description of PlaylistsControllerTest
+ * Classe de tests du contrôleur des playlists.
  *
  * @author pilou
  */
 class PlaylistsControllerTest extends WebTestCase{
     
+    /**
+     * Test vérifiant l'accès à la page des playlists.
+     */
     public function testAccesPage(){
         $client = static::createClient();
         $client->request('GET', '/playlists');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
     
+    /**
+     * Test vérifiant le contenu de la page.
+     */
     public function testContenuPage(){
         $client = static::createClient();
         $client->request('GET', '/playlists');
         $this->assertSelectorTextContains("h5", "Bases de la programmation (C#)");
     }
     
+    /**
+     * Test vérifiant le tri sur les playlists.
+     */
     public function testTriPlaylist(){
         $client = static::createClient();
         $client->request('GET', '/playlists/tri/name/ASC');
@@ -32,6 +41,9 @@ class PlaylistsControllerTest extends WebTestCase{
         $this->assertSelectorTextContains("h5", "Bases de la programmation (C#)");
     }
     
+    /**
+     * Test vérifiant le tri sur le nombre de formations.
+     */
     public function testTriNbFormations(){
         $client = static::createClient();
         $client->request('GET', '/playlists/tri/nbformations/ASC');
@@ -40,6 +52,9 @@ class PlaylistsControllerTest extends WebTestCase{
         $this->assertSelectorTextContains("h5", "playlist test");
     }
     
+    /**
+     * Test vérifiant le filtre sur les playlists.
+     */
     public function testFiltrePlaylist(){
         $client = static::createClient();
         $client->request('GET', '/playlists');
@@ -53,6 +68,9 @@ class PlaylistsControllerTest extends WebTestCase{
         $this->assertSelectorTextContains("h5", "Cours Composant logiciel");
     }
     
+    /**
+     * Test vérifiant le clic sur le bouton permettant de consulter une playlist.
+     */
     public function testLinkPlaylist(){
         $client = static::createClient();
         $client->request('GET', '/playlists');

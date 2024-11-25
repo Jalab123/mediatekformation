@@ -10,32 +10,41 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Description of PlaylistsController
+ * Contrôleur des playlists.
  *
  * @author emds
  */
 class PlaylistsController extends AbstractController {
     
     /**
-     * 
+     * Repository des playlists.
      * @var PlaylistRepository
      */
     private $playlistRepository;
     
     /**
-     * 
+     * Repository des formations.
      * @var FormationRepository
      */
     private $formationRepository;
     
     /**
-     * 
+     * Repository des catégories.
      * @var CategorieRepository
      */
     private $categorieRepository;    
     
+    /**
+     * Lien vers la page des formations.
+     */
     const LIEN_PLAYLISTS = "pages/playlists.html.twig";
     
+    /**
+     * Constructeur.
+     * @param PlaylistRepository $playlistRepository
+     * @param CategorieRepository $categorieRepository
+     * @param FormationRepository $formationRespository
+     */
     function __construct(PlaylistRepository $playlistRepository, 
             CategorieRepository $categorieRepository,
             FormationRepository $formationRespository) {
@@ -45,6 +54,7 @@ class PlaylistsController extends AbstractController {
     }
     
     /**
+     * Fonction exécutée lors du chargement de la page.
      * @Route("/playlists", name="playlists")
      * @return Response
      */
@@ -57,7 +67,14 @@ class PlaylistsController extends AbstractController {
             'categories' => $categories            
         ]);
     }
-
+    
+    /**
+     * Fonction permettant de trier sur un certain champ et un certain ordre.
+     * @Route("/playlists/tri/{champ}/{ordre}", name="playlists.sort")
+     * @param type $champ
+     * @param type $ordre
+     * @return Response
+     */
     #[Route('/playlists/tri/{champ}/{ordre}', name: 'playlists.sort')]
     public function sort($champ, $ordre): Response{
         if ($champ == "name"){
@@ -72,6 +89,14 @@ class PlaylistsController extends AbstractController {
         ]);
     }          
 
+    /**
+     * Fonction permettant de filtrer sur un certain champ et une certaine table.
+     * @Route("/playlists/recherche/{champ}/{table}", name="playlists.findallcontain")
+     * @param type $champ
+     * @param Request $request
+     * @param type $table
+     * @return Response
+     */
     #[Route('/playlists/recherche/{champ}/{table}', name: 'playlists.findallcontain')]
     public function findAllContain($champ, Request $request, $table=""): Response{
         $valeur = $request->get("recherche");
@@ -85,6 +110,12 @@ class PlaylistsController extends AbstractController {
         ]);
     }  
 
+    /**
+     * Fonction permettant l'affichage d'une playlist.
+     * @Route("/playlists/formation/{id}", name="playlists.showone")
+     * @param type $id
+     * @return Response
+     */
     #[Route('/playlists/playlist/{id}', name: 'playlists.showone')]
     public function showOne($id): Response{
         $playlist = $this->playlistRepository->find($id);

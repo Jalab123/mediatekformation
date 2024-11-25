@@ -12,29 +12,36 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Description of AdminFormationsController
+ * Contrôleur admin des formations.
  *
  * @author pilou
  */
 class AdminFormationsController extends AbstractController {
     
     /**
-     * 
+     * Repository des formations.
      * @var FormationRepository
      */
     private $formationRepository;
     
     /**
-     * 
+     * Repository des catégories.
      * @var CategorieRepository
      */
     private $categorieRepository;
     
+    /**
+     * Lien vers la page des formations.
+     */
     const LIEN_FORMATIONS = "admin/admin.formations.html.twig";
+    
+    /**
+     * Lien vers la route des formations.
+     */
     const ROUTE_FORMATIONS = "admin.formations";
     
     /**
-     * 
+     * Constructeur.
      * @param FormationRepository $repository
      */
     public function __construct(FormationRepository $formationRepository, CategorieRepository $categorieRepository) {
@@ -42,6 +49,11 @@ class AdminFormationsController extends AbstractController {
         $this->categorieRepository = $categorieRepository;
     }
     
+    /**
+     * Fonction exécutée lors du chargement de la page.
+     * @Route("/admin/formations", name="admin.formations")
+     * @return Response
+     */
     #[Route('/admin/formations/', name: self::ROUTE_FORMATIONS)]
     public function index(): Response{
         $formations = $this->formationRepository->findAll();
@@ -52,6 +64,14 @@ class AdminFormationsController extends AbstractController {
         ]);
     }
 
+    /**
+     * Fonction permettant de trier sur un certain champ, un certain ordre, et une certaine table.
+     * @Route("/admin/formations/tri/{champ}/{ordre}/{table}", name="admin.formations.sort")
+     * @param type $champ
+     * @param type $ordre
+     * @param type $table
+     * @return Response
+     */
     #[Route('/admin/formations/tri/{champ}/{ordre}/{table}', name: 'admin.formations.sort')]
     public function sort($champ, $ordre, $table=""): Response{
         $formations = $this->formationRepository->findAllOrderBy($champ, $ordre, $table);
@@ -62,6 +82,14 @@ class AdminFormationsController extends AbstractController {
         ]);
     }     
 
+    /**
+     * Fonction permettant de filtrer sur un certain champ et une certaine table.
+     * @Route("/admin/formations/recherche/{champ}/{table}", name="admin.formations.findallcontain")
+     * @param type $champ
+     * @param Request $request
+     * @param type $table
+     * @return Response
+     */
     #[Route('/admin/formations/recherche/{champ}/{table}', name: 'admin.formations.findallcontain')]
     public function findAllContain($champ, Request $request, $table=""): Response{
         $valeur = $request->get("recherche");
@@ -75,6 +103,12 @@ class AdminFormationsController extends AbstractController {
         ]);
     }  
     
+    /**
+     * Fonction permettant de supprimer une formation.
+     * @Route("/admin/formations/suppr/{id}", name="admin.formation.suppr")
+     * @param int $id
+     * @return Response
+     */
     #[Route('/admin/formations/suppr/{id}', name: 'admin.formation.suppr')]
     public function suppr(int $id): Response {
         $formation = $this->formationRepository->find($id);
@@ -82,7 +116,14 @@ class AdminFormationsController extends AbstractController {
         return $this->redirectToRoute(self::ROUTE_FORMATIONS);
     }
     
-    #[Route('admin/formations/edit/{id}', name: 'admin.formation.edit')]
+    /**
+     * Fonction permettant de modifier une formation.
+     * @Route("/admin/formations/edit/{id}", name="admin.formation.edit")
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/admin/formations/edit/{id}', name: 'admin.formation.edit')]
     public function edit(int $id, Request $request): Response{
        $formation = $this->formationRepository->find($id);
        $formFormation = $this->createForm(FormationType::class, $formation);
@@ -99,7 +140,13 @@ class AdminFormationsController extends AbstractController {
        ]);
     }
     
-    #[Route('admin/formations/ajout', name: 'admin.formation.ajout')]
+    /**
+     * Fonction permettant d'ajouter une formation.
+     * @Route("/admin/formations/ajout", name="admin.formation.ajout")
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/admin/formations/ajout', name: 'admin.formation.ajout')]
     public function add(Request $request): Response{
        $formation = new Formation();
        $formFormation = $this->createForm(FormationType::class, $formation);

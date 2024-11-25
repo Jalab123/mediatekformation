@@ -6,12 +6,15 @@ use DateTime;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Description of FormationTest
+ * Classe de tests permettant de tester la méthode getPublishedAtString.
  *
  * @author pilou
  */
 class FormationTest extends TestCase {
     
+    /**
+     * Test getPublishedAtString.
+     */
     public function testGetPublishedAtString(){
         $formation = new Formation();
         $formation->setPublishedAt(new DateTime("2024-11-15"));

@@ -6,12 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Description of AccueilControllerTest
+ * Classe de tests du contrôleur de la page d'accueil.
  *
  * @author pilou
  */
 class AccueilControllerTest extends WebTestCase{
     
+    /**
+     * Test vérifiant l'accès à la page d'accueil.
+     */
     public function testAccesPage(){
         $client = static::createClient();
         $client->request('GET', '/');

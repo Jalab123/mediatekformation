@@ -7,30 +7,44 @@ use App\Repository\PlaylistRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
- * Description of PlaylistRepositoryTest
+ * Classe de tests du repository des playlists.
  *
  * @author pilou
  */
 class PlaylistRepositoryTest extends KernelTestCase {
     
+    /**
+     * Test vérifiant l'accès au repository.
+     * @return PlaylistRepository
+     */
     public function recupRepository(): PlaylistRepository {
         self::bootKernel();
         $repository = self::getContainer()->get(PlaylistRepository::class);
         return $repository;
     }
     
+    /**
+     * Test vérifiant le nombre de playlists.
+     */
     public function testNbPlaylists(){
         $repository = $this->recupRepository();
         $nbPlaylists = $repository->count([]);
         $this->assertEquals(28, $nbPlaylists);
     }
     
+    /**
+     * Fonction permettant d'ajouter une nouvelle playlist.
+     * @return Playlist
+     */
     public function newPlaylist(): Playlist {
         $playlist = (new Playlist())
                 ->setName("Eclipse Test");
         return $playlist;
     }
     
+    /**
+     * Test add playlist.
+     */
     public function testAddPlaylist(){
         $repository = $this->recupRepository();
         $playlist = $this->newPlaylist();
@@ -39,6 +53,9 @@ class PlaylistRepositoryTest extends KernelTestCase {
         $this->assertEquals($nbPlaylists + 1, $repository->count([]));
     }
     
+    /**
+     * Test remove playlist.
+     */
     public function testRemovePlaylist(){
         $repository = $this->recupRepository();
         $playlist = $this->newPlaylist();
@@ -48,6 +65,9 @@ class PlaylistRepositoryTest extends KernelTestCase {
         $this->assertEquals($nbPlaylists - 1, $repository->count([]));
     }
     
+    /**
+     * Test findAllOrderByName.
+     */
     public function testFindAllOrderByName(){
         $repository = $this->recupRepository();
         $nbPlaylistsTotal = $repository->count([]);
@@ -57,6 +77,9 @@ class PlaylistRepositoryTest extends KernelTestCase {
         $this->assertEquals("Bases de la programmation (C#)", $playlists[0]->getName());
     }
     
+    /**
+     * Test findAllOrderByNbFormations.
+     */
     public function testFindAllOrderByNbFormations(){
         $repository = $this->recupRepository();
         $nbPlaylistsTotal = $repository->count([]);
@@ -66,6 +89,9 @@ class PlaylistRepositoryTest extends KernelTestCase {
         $this->assertEquals("playlist test", $playlists[0]->getName());
     }
     
+    /**
+     * Test findByContainValue.
+     */
     public function testFindByContainValue(){
         $repository = $this->recupRepository();
         $playlist = $this->newPlaylist();

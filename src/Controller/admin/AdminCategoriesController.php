@@ -12,27 +12,39 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Description of AdminFormationsController
+ * Contrôleur admin des catégories.
  *
  * @author pilou
  */
 class AdminCategoriesController extends AbstractController {
     
     /**
-     * 
+     * Repository des formations.
      * @var FormationRepository
      */
     private $formationRepository;
     
     /**
-     * 
+     * Repository des catégories.
      * @var CategorieRepository
      */
     private $categorieRepository;    
     
+    /**
+     * Lien vers la page des catégories.
+     */
     const LIEN_CATEGORIES = "admin/admin.categories.html.twig";
+    
+    /**
+     * Lien vers la route des catégories.
+     */
     const ROUTE_CATEGORIES = "admin.categories";
     
+    /**
+     * Constructeur.
+     * @param CategorieRepository $categorieRepository
+     * @param FormationRepository $formationRespository
+     */
     function __construct( 
             CategorieRepository $categorieRepository,
             FormationRepository $formationRespository) {
@@ -41,10 +53,11 @@ class AdminCategoriesController extends AbstractController {
     }
     
     /**
+     * Fonction exécutée lors du chargement de la page.
      * @Route("/admin/categories", name="admin.categories")
      * @return Response
      */
-    #[Route('/admin/categories', name: 'admin.categories')]
+    #[Route('/admin/categories', name: self::ROUTE_CATEGORIES)]
     public function index(Request $request): Response{
         $categories = $this->categorieRepository->findAll();
         
@@ -69,6 +82,12 @@ class AdminCategoriesController extends AbstractController {
         ]);
     }
     
+    /**
+     * Fonction permettant de supprimer une catégorie.
+     * @Route("/admin/categories/suppr/{id}", name="admin.categorie.suppr")
+     * @param int $id
+     * @return Response
+     */
     #[Route('/admin/categories/suppr/{id}', name: 'admin.categorie.suppr')]
     public function suppr(int $id): Response {
         $categorie = $this->categorieRepository->find($id);
@@ -80,7 +99,11 @@ class AdminCategoriesController extends AbstractController {
     }
     
     
-    
+    /**
+     * Fonction permettant de vérifier si une catégorie est déjà utilisée, ou non.
+     * @param int $id
+     * @return bool
+     */
     public function categorieUtilisee(int $id): bool {
         $categorie = $this->categorieRepository->find($id);
         $formations = $this->formationRepository->findAllOrderBy('id', 'ASC');
@@ -95,6 +118,11 @@ class AdminCategoriesController extends AbstractController {
         return false;
     }
     
+    /**
+     * Fonction permettant de vérifier qu'une catégorie existe déjà ou non.
+     * @param string $name
+     * @return bool
+     */
     public function categorieExiste(string $name): bool {
         $categories = $this->categorieRepository->findAll();
         foreach ($categories as $c){

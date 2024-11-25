@@ -7,23 +7,41 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Repository des formations.
  * @extends ServiceEntityRepository<Formation>
  */
 class FormationRepository extends ServiceEntityRepository
 {
+    /**
+     * Date de publication.
+     */
     const DATE_PUBLICATION = 'f.publishedAt';
     
+    /**
+     * Constructeur.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Formation::class);
     }
 
+    /**
+     * Fonction permettant d'ajouter une formation.
+     * @param Formation $entity
+     * @return void
+     */
     public function add(Formation $entity): void
     {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * Fonction permettant de supprimer une formation.
+     * @param Formation $entity
+     * @return void
+     */
     public function remove(Formation $entity): void
     {
         $this->getEntityManager()->remove($entity);

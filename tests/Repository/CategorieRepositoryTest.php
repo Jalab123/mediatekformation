@@ -7,30 +7,44 @@ use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
- * Description of CategorieRepositoryTest
+ * Classe de tests du repository des catégories.
  *
  * @author pilou
  */
 class CategorieRepositoryTest extends KernelTestCase {
     
+    /**
+     * Test vérifiant l'accès au repository.
+     * @return CategorieRepository
+     */
     public function recupRepository(): CategorieRepository {
         self::bootKernel();
         $repository = self::getContainer()->get(CategorieRepository::class);
         return $repository;
     }
     
+    /**
+     * Test vérifiant le nombre de catégories.
+     */
     public function testNbCategories(){
         $repository = $this->recupRepository();
         $nbCategories = $repository->count([]);
         $this->assertEquals(9, $nbCategories);
     }
     
+    /**
+     * Fonction permettant d'ajouter une nouvelle catégorie.
+     * @return Categorie
+     */
     public function newCategorie(): Categorie {
         $categorie = (new Categorie())
                 ->setName("Java ");
         return $categorie;
     }
     
+    /**
+     * Test add catégorie.
+     */
     public function testAddCategorie(){
         $repository = $this->recupRepository();
         $categorie = $this->newCategorie();
@@ -39,6 +53,9 @@ class CategorieRepositoryTest extends KernelTestCase {
         $this->assertEquals($nbCategories + 1, $repository->count([]));
     }
     
+    /**
+     * Test remove catégorie.
+     */
     public function testRemoveCategorie(){
         $repository = $this->recupRepository();
         $categorie = $this->newCategorie();
@@ -48,6 +65,9 @@ class CategorieRepositoryTest extends KernelTestCase {
         $this->assertEquals($nbCategories - 1, $repository->count([]));
     }
     
+    /**
+     * Test findAllForOnePlaylist.
+     */
     public function testFindAllForOnePlaylist(){
         $repository = $this->recupRepository();
         $categories = $repository->findAllForOnePlaylist(1);

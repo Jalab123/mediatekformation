@@ -13,33 +13,46 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Description of PlaylistsController
+ * Contrôleur admin des playlists.
  *
- * @author emds
+ * @author pilou
  */
 class AdminPlaylistsController extends AbstractController {
     
     /**
-     * 
+     * Repository des playlists.
      * @var PlaylistRepository
      */
     private $playlistRepository;
     
     /**
-     * 
+     * Repository des formations.
      * @var FormationRepository
      */
     private $formationRepository;
     
     /**
-     * 
+     * Repository des catégories.
      * @var CategorieRepository
      */
     private $categorieRepository;    
     
+    /**
+     * Lien vers la page des playlists.
+     */
     const LIEN_PLAYLISTS = "admin/admin.playlists.html.twig";
+    
+    /**
+     * Lien vers la route des playlists.
+     */
     const ROUTE_PLAYLISTS = "admin.playlists";
     
+    /**
+     * Constructeur.
+     * @param PlaylistRepository $playlistRepository
+     * @param CategorieRepository $categorieRepository
+     * @param FormationRepository $formationRespository
+     */
     function __construct(PlaylistRepository $playlistRepository, 
             CategorieRepository $categorieRepository,
             FormationRepository $formationRespository) {
@@ -49,6 +62,7 @@ class AdminPlaylistsController extends AbstractController {
     }
     
     /**
+     * Fonction exécutée lors du chargement de la page.
      * @Route("/admin/playlists", name="admin.playlists")
      * @return Response
      */
@@ -62,6 +76,13 @@ class AdminPlaylistsController extends AbstractController {
         ]);
     }
 
+    /**
+     * Fonction permettant de trier sur un certain champ et un certain ordre.
+     * @Route("/admin/playlists/tri/{champ}/{ordre}", name="admin.playlists.sort")
+     * @param type $champ
+     * @param type $ordre
+     * @return Response
+     */
     #[Route('/admin/playlists/tri/{champ}/{ordre}', name: 'admin.playlists.sort')]
     public function sort($champ, $ordre): Response{
         if ($champ == "name"){
@@ -76,6 +97,14 @@ class AdminPlaylistsController extends AbstractController {
         ]);
     }          
 
+    /**
+     * Fonction permettant de filtrer sur un certain champ et une certaine table.
+     * @Route("/admin/playlists/recherche/{champ}/{table}", name="admin.playlists.findallcontain")
+     * @param type $champ
+     * @param Request $request
+     * @param type $table
+     * @return Response
+     */
     #[Route('/admin/playlists/recherche/{champ}/{table}', name: 'admin.playlists.findallcontain')]
     public function findAllContain($champ, Request $request, $table=""): Response{
         $valeur = $request->get("recherche");
@@ -89,6 +118,12 @@ class AdminPlaylistsController extends AbstractController {
         ]);
     }  
     
+    /**
+     * Fonction permettant de supprimer une playlist.
+     * @Route("/admin/playlists/suppr/{id}", name="admin.playlist.suppr")
+     * @param int $id
+     * @return Response
+     */
     #[Route('/admin/playlists/suppr/{id}', name: 'admin.playlist.suppr')]
     public function suppr(int $id): Response {
         $playlist = $this->playlistRepository->find($id);
@@ -98,7 +133,14 @@ class AdminPlaylistsController extends AbstractController {
         return $this->redirectToRoute(self::ROUTE_PLAYLISTS);
     }
     
-    #[Route('admin/playlists/edit/{id}', name: 'admin.playlist.edit')]
+    /**
+     * Fonction permettant de modifier une playlist.
+     * @Route("/admin/playlists/edit/{id}", name="admin.playlist.edit")
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/admin/playlists/edit/{id}', name: 'admin.playlist.edit')]
     public function edit(int $id, Request $request): Response{
        $playlist = $this->playlistRepository->find($id);
        $formPlaylist = $this->createForm(PlaylistType::class, $playlist);
@@ -117,7 +159,13 @@ class AdminPlaylistsController extends AbstractController {
        ]);
     }
     
-    #[Route('admin/playlists/ajout', name: 'admin.playlist.ajout')]
+    /**
+     * Fonction permettant d'ajouter une playlist.
+     * @Route("/admin/playlists/ajout}", name="admin.playlist.ajout")
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/admin/playlists/ajout', name: 'admin.playlist.ajout')]
     public function add(Request $request): Response{
        $playlist = new Playlist();
        $formPlaylist = $this->createForm(PlaylistType::class, $playlist);
