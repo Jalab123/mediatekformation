@@ -1,86 +1,128 @@
 # Mediatekformation
-## Présentation
-Ce site, développé avec Symfony 6.4, permet d'accéder aux vidéos d'auto-formation proposées par une chaîne de médiathèques et qui sont aussi accessibles sur YouTube.<br> 
-Actuellement, seule la partie front office a été développée. Elle contient les fonctionnalités globales suivantes :<br>
-![img1](https://github.com/user-attachments/assets/9c5c503b-738d-40cf-ba53-36ba4c0209e8)
-## Les différentes pages
-Voici les 5 pages correspondant aux différents cas d’utilisation.
-### Page 1 : l'accueil
-Cette page présente le fonctionnement du site et les 2 dernières vidéos mises en ligne.<br>
-La partie du haut contient une bannière (logo, nom et phrase présentant le but du site) et le menu permettant d'accéder aux 3 pages principales (Accueil, Formations, Playlists).<br>
-Le centre contient un texte de présentation avec, entre autres, les liens pour accéder aux 2 autres pages principales.<br>
-La partie basse contient les 2 dernières formations mises en ligne. Cliquer sur une image permet d'accéder à la page 3 de présentation de la formation.<br>
-Le bas de page contient un lien pour accéder à la page des CGU : ce lien est présent en bas de chaque page excepté la page des CGU.<br>
-![img2](https://github.com/user-attachments/assets/523b4233-3505-4b8c-9db0-5e7b72965bc6)
-### Page 2 : les formations
-Cette page présente les formations proposées en ligne (accessibles sur YouTube).<br>
-La partie haute est identique à la page d'accueil (bannière et menu).<br>
-La partie centrale contient un tableau composé de 5 colonnes :<br>
-•	La 1ère colonne ("formation") contient le titre de chaque formation.<br>
-•	La 2ème colonne ("playlist") contient le nom de la playlist dans laquelle chaque formation se trouve.<br>
-•	La 3ème colonne ("catégories") contient la ou les catégories concernées par chaque formation (langage…).<br>
-•	La 4ème colonne ("date") contient la date de parution de chaque formation.<br>
-•	LA 5ème contient la capture visible sur YouTube, pour chaque formation.<br>
-Au niveau des colonnes "formation", "playlist" et "date", 2 boutons permettent de trier les lignes en ordre croissant ("<") ou décroissant (">").<br>
-Au niveau des colonnes "formation" et "playlist", il est possible de filtrer les lignes en tapant un texte : seuls les lignes qui contiennent ce texte sont affichées. Si la zone est vide, le fait de cliquer sur "filtrer" permet de retrouver la liste complète.<br> 
-Au niveau de la catégorie, la sélection d'une catégorie dans le combo permet d'afficher uniquement les formations qui ont cette catégorie. Le fait de sélectionner la ligne vide du combo permet d'afficher à nouveau toutes les formations.<br>
-Par défaut la liste est triée sur la date par ordre décroissant (la formation la plus récente en premier).<br>
-Le fait de cliquer sur une miniature permet d'accéder à la troisième page contenant le détail de la formation.<br>
-![img3](https://github.com/user-attachments/assets/bc033cf9-41a5-4cad-a268-8abb400965c5)
-### Page 3 : détail d'une formation
-Cette page n'est pas accessible par le menu mais uniquement en cliquant sur une miniature dans la page "Formations" ou une image dans la page "Accueil".<br>
-La partie haute est identique à la page d'accueil (bannière et menu).<br>
-La partie centrale est séparée en 2 parties :<br>
-•	La partie gauche contient la vidéo qui peut être directement visible dans le site ou sur YouTube.<br>
-•	La partie droite contient la date de parution, le titre de la formation, le nom de la playlist, la liste des catégories et sa description détaillée.<br>
-![img4](https://github.com/user-attachments/assets/f41d05d8-5980-4dc4-9eb7-58d1c31b8a25)
-### Page 4 : les playlists
-Cette page présente les playlists.<br>
-La partie haute est identique à la page d'accueil (bannière et menu).<br>
-La partie centrale contient un tableau composé de 3 colonnes :<br>
-•	La 1ère colonne ("playlist") contient le nom de chaque playlist.<br>
-•	La 2ème colonne ("catégories") contient la ou les catégories concernées par chaque playlist (langage…).<br>
-•	La 3ème contient un bouton pour accéder à la page de présentation de la playlist.<br>
-Au niveau de la colonne "playlist", 2 boutons permettent de trier les lignes en ordre croissant ("<") ou décroissant (">"). Il est aussi possible de filtrer les lignes en tapant un texte : seuls les lignes qui contiennent ce texte sont affichées. Si la zone est vide, le fait de cliquer sur "filtrer" permet de retrouver la liste complète.<br> 
-Au niveau de la catégorie, la sélection d'une catégorie dans le combo permet d'afficher uniquement les playlists qui ont cette catégorie. Le fait de sélectionner la ligne vide du combo permet d'afficher à nouveau toutes les playlists.<br>
-Par défaut la liste est triée sur le nom de la playlist.<br>
-Cliquer sur le bouton "voir détail" d'une playlist permet d'accéder à la page 5 qui présente le détail de la playlist concernée.<br>
-![img5](https://github.com/user-attachments/assets/bbe8934f-8d4b-4da2-8216-60b96b726d8a)
-### Page 5 : détail d'une playlist
-Cette page n'est pas accessible par le menu mais uniquement en cliquant sur un bouton "voir détail" dans la page "Playlists".<br>
-La partie haute est identique à la page d'accueil (bannière et menu).<br>
-La partie centrale est séparée en 2 parties :<br>
-•	La partie gauche contient les informations de la playlist (titre, liste des catégories, description).<br>
-•	La partie droite contient la liste des formations contenues dans la playlist (miniature et titre) avec possibilité de cliquer sur une formation pour aller dans la page de la formation.<br>
-![img6](https://github.com/user-attachments/assets/f216a9e7-084a-4683-9b4e-cada5574a0e2)
-## La base de données
-La base de données exploitée par le site est au format MySQL.
-### Schéma conceptuel de données
-Voici le schéma correspondant à la BDD.<br>
-![img7](https://github.com/user-attachments/assets/f3eca694-bf96-4f6f-811e-9d11a7925e9e)
-<br>video_id contient le code YouTube de la vidéo, qui permet ensuite de lancer la vidéo à l'adresse suivante :<br>
-https://www.youtube.com/embed/<<<video_id>>>
-### Relations issues du schéma
-<code><strong>formation (id, published_at, title, video_id, description, playlist_id)</strong>
-id : clé primaire
-playlist_id : clé étrangère en ref. à id de playlist
-<strong>playlist (id, name, description)</strong>
-id : clé primaire
-<strong>categorie (id, name)</strong>
-id : clé primaire
-<strong>formation_categorie (id_formation, id_categorie)</strong>
-id_formation, id_categorie : clé primaire
-id_formation : clé étrangère en ref. à id de formation
-id_categorie : clé étrangère en ref. à id de categorie</code>
+## Lien vers le dépôt d'origine
+<br>Vous pouvez retrouver le dépôt d'origine en cliquant sur ce lien: https://github.com/CNED-SLAM/mediatekformation .
+<br>Dans le readme de ce dépôt se trouve l'application d'origine, ainsi que la présentation de l'application d'origine.
 
-Remarques : 
-Les clés primaires des entités sont en auto-incrémentation.<br>
-Le chemin des images (des 2 tailles) n'est pas mémorisé dans la BDD car il peut être fabriqué de la façon suivante :<br>
-"https://i.ytimg.com/vi/" suivi de, soit "/default.jpg" (pour la miniature), soit "/hqdefault.jpg" (pour l'image plus grande de la page d'accueil).
-## Test de l'application en local
-- Vérifier que Composer, Git et Wamserver (ou équivalent) sont installés sur l'ordinateur.
-- Télécharger le code et le dézipper dans www de Wampserver (ou dossier équivalent) puis renommer le dossier en "mediatekformation".<br>
-- Ouvrir une fenêtre de commandes en mode admin, se positionner dans le dossier du projet et taper "composer install" pour reconstituer le dossier vendor.<br>
-- Dans phpMyAdmin, se connecter à MySQL en root sans mot de passe et créer la BDD 'mediatekformation'.<br>
-- Récupérer le fichier mediatekformation.sql en racine du projet et l'utiliser pour remplir la BDD (si vous voulez mettre un login/pwd d'accès, il faut créer un utilisateur, lui donner les droits sur la BDD et il faut le préciser dans le fichier ".env" en racine du projet).<br>
-- De préférence, ouvrir l'application dans un IDE professionnel. L'adresse pour la lancer est : http://localhost/mediatekformation/public/index.php<br>
+## Présentation des fonctionnalités ajoutées
+<br>Dans cette partie, vous pourrez retrouver les fonctionnalités ajoutées à l'application.
+
+### Nombre de formations par playlist + tri
+<br>Dans la page des playlists, une nouvelle colonne a été ajoutée, ainsi que la possibilité d'effectuer 
+un tri par ordre croissant ou décroissant sur cette nouvelle colonne.
+
+![img](images/1.png)
+
+### Connexion admin
+<br>Il est possible de se connecter en tant qu'admin de façon sécurisée (grâce à KeyCloak) via le lien 
+http://localhost/mediatekformation/public/admin/formations (en local), ou bien
+https://mediatekformationugo.go.yj.fr/ (en ligne).
+
+![img](images/2.png)
+
+### Page admin de gestion des formations
+<br>Une fois connecté en tant qu'admin, il est possible d'accéder à la page admin de gestion des
+formations. Tous les tris et filtres présents sur la page des formations d'origine sont fonctionnels
+sur cette page.
+
+![img](images/3.png)
+
+### Ajouter une formation 
+<br>Il est possible d'ajouter une formation, à condition que toutes les informations marquées par un
+astérisque (*) soient complétées et valides.
+
+![img](images/4.png)
+
+### Modifier une formation
+<br>Il est possible de modifier une formation, à condition que toutes les informations marquées par un
+astérisque (*) soient complétées et valides.
+
+![img](images/5.png)
+
+### Supprimer une formation
+<br>Il est possible de supprimer une formation après confirmation. La formation sera alors supprimée
+de la playlist auquelle elle appartenait.
+
+![img](images/6.png)
+
+### Page admin de gestion des playlits
+<br>Une fois connecté en tant qu'admin, il est possible d'accéder à la page admin de gestion des
+playlists. Tous les tris et filtres présents sur la page des playlists d'origine sont fonctionnels
+sur cette page.
+
+![img](images/7.png)
+
+### Ajouter une playlist
+<br>Il est possible d'ajouter une playlist, à condition que toutes les informations marquées par un
+astérisque (*) soient complétées et valides (donc son nom).
+
+![img](images/8.png)
+
+### Modifier une playlist
+<br>Il est possible de modifier une playlist, à condition que toutes les informations marquées par un
+astérisque (*) soient complétées et valides (donc son nom).
+
+![img](images/9.png)
+
+### Supprimer une playlist
+<br>Il est possible de supprimer une playlist après confirmation. Pour qu'une playlist soit
+supprimable, celle-ci doit impérativement être vide.
+
+![img](images/10.png)
+
+### Page admin de gestion des catégories
+<br>Une fois connecté en tant qu'admin, il est possible d'accéder à la page admin de gestion des
+catégories.
+
+![img](images/11.png)
+
+### Ajouter une catégorie
+<br>Il est possible d'ajouter une nouvelle catégorie via un mini-formulaire, en saisissant son nom.
+
+![img](images/12.png)
+
+### Supprimer une catégorie
+<br>Il est possible de supprimer une catégorie après confirmation. Pour qu'une catégorie soit
+supprimable, celle-ci doit impérativement être inutilisée.
+
+![img](images/13.png)
+
+### Déconnexion
+<br>Sur chaque page admin, il est possible de se déconnecter via un bouton situé en haut à droite.
+Il faudra alors saisir de nouveau les identifiants afin de pouvoir se reconnecter dans la partie
+back-office.
+
+![img](images/14.png)
+
+### Menu admin
+<br>Sur chaque paga admin, le menu a été adapté afin de faciliter la navigation:
+<br>-Accueil -> Accès à la page d'accueil.
+<br>-Formations -> Accès à la page admin de gestion des formations.
+<br>-Playlists -> Accès à la page admin de gestion des playlists.
+<br>-Catégories -> Accès à la page admin de gestion des catégories.
+
+![img](images/15.png)
+
+### Documentation technique
+<br>Il est possible de consulter la documentation technique via le lien
+http://localhost/mediatekformation/public/documentation/index.html (en local), ou bien
+https://mediatekformationugo.go.yj.fr/documentation/index.html (en ligne).
+
+![img](images/16.png)
+
+### Vidéo de présentation des fonctionnalités
+<br>Pour plus d'informations, il est possible de consulter cette vidéo, montrant toutes les
+fonctinnalités de la nouvelle application: (lien de la vidéo).
+
+### Accéder au site en ligne
+<br>Il est possible d'accéder au site hébergé en ligne via ce lien: https://mediatekformationugo.go.yj.fr/ .
+
+### Tutoriel d'installation de l'application
+<br>1) Télécharger le zip de l'application.
+<br>2) Après avoir installé et configuré Wamp64, lancer cette application.
+<br>3) Dans le navigateur, accédez à la phpMyAdmin via l'adresse suivante: http://localhost/phpmyadmin .
+<br>4) Extraire le zip dans un dossier "mediatekformation" au niveau du dossier "www" de votre installation de Wamp64 (par défaut: "C:\wamp64\www").
+<br>5) Créer une nouvelle base de données "mediatekformation", et y importer le fichier "mediatekformation.sql" présent dans les fichiers dézippés.
+<br>6) Ouvrir une console en mode administrateur, se placer dans le dossier du site (normalement: "C:\wamp64\www"), et exécuter la commande "composer install" afin de recréer le dossier "vendor".
+<br>7) Après avoir installé et configuré KeyCloak, lancer cette application en tapant la commande "kc.bat start-dev" dans une console en mode administrateur depuis le dossier "bin" de votre installation de KeyCloak (par défaut: "C:\keycloak\bin").
+<br>8) Accéder au site via le lien http://localhost/mediatekformation/public/ , à la partie admin via le lien http://localhost/mediatekformation/public/admin/formations , et à la documentation technique via le lien http://localhost/mediatekformation/public/documentation/index.html .
+
