@@ -15,7 +15,7 @@ un tri par ordre croissant ou décroissant sur cette nouvelle colonne.
 ### Connexion admin
 <br>Il est possible de se connecter en tant qu'admin de façon sécurisée (grâce à KeyCloak) via le lien 
 http://localhost/mediatekformation/public/admin/formations (en local), ou bien
-https://mediatekformationugo.go.yj.fr/ (en ligne).
+https://mediatekformationugo.go.yj.fr/admin/formations (en ligne).
 
 ![img](images/2.png)
 
@@ -44,7 +44,7 @@ de la playlist auquelle elle appartenait.
 
 ![img](images/6.png)
 
-### Page admin de gestion des playlits
+### Page admin de gestion des playlists
 <br>Une fois connecté en tant qu'admin, il est possible d'accéder à la page admin de gestion des
 playlists. Tous les tris et filtres présents sur la page des playlists d'origine sont fonctionnels
 sur cette page.
@@ -111,7 +111,7 @@ https://mediatekformationugo.go.yj.fr/documentation/index.html (en ligne).
 
 ### Vidéo de présentation des fonctionnalités
 <br>Pour plus d'informations, il est possible de consulter cette vidéo, montrant toutes les
-fonctinnalités de la nouvelle application: (lien de la vidéo).
+fonctinnalités de la nouvelle application: https://www.youtube.com/watch?v=xTFIN5iEiFU.
 
 ### Accéder au site en ligne
 <br>Il est possible d'accéder au site hébergé en ligne via ce lien: https://mediatekformationugo.go.yj.fr/ .

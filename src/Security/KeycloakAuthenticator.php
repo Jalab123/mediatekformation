@@ -82,7 +82,7 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
                 if ($userInDatabase){
                     $userInDatabase->setKeyCloakId($keycloakUser->getId());
                     $this->entityManager->persist($userInDatabase);
-                    $this->etntiyManager->flush();
+                    $this->entityManager->flush();
                     return $userInDatabase;
                 }
                 // 3) le user n'existe pas encore dans la BDD
@@ -105,7 +105,7 @@ class KeycloakAuthenticator extends OAuth2Authenticator implements Authenticatio
      * @return Response|null
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response {
-        $message = strtr($exception->getMessageKey(), $exception->getMessageDAta());
+        $message = strtr($exception->getMessageKey(), $exception->getMessageData());
         return new Response($message, Response::HTTP_FORBIDDEN);
     }
 
